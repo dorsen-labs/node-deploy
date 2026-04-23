@@ -211,7 +211,7 @@ function start_node() {
         --http --http.addr 0.0.0.0 --http.port ${http_port} --http.corsdomain "*" \
         --metrics --metrics.addr localhost --metrics.port ${metrics_port} \
         --pprof --pprof.addr localhost --pprof.port ${pprof_port} \
-        --gcmode ${gcmode} --syncmode full --monitor.maliciousvote \
+        --gcmode ${gcmode} --syncmode full --monitor.maliciousvote --noexecution \
         --rialtohash ${rialtoHash} \
         --override.passedforktime ${PassedForkTime} \
         --override.lorentz ${PassedForkTime} \

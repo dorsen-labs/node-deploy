@@ -3,6 +3,7 @@ NetworkId = 714
 SyncMode = "full"
 NoPruning = false
 NoPrefetch = false
+DisableTxIndexer = true # disable tx/log indexing to reduce memory (filtermaps)
 DatabaseCache = 512
 DatabaseFreezer = ""
 TrieCleanCache = 256
