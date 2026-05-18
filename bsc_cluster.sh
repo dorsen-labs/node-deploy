@@ -100,7 +100,7 @@ function prepare_config() {
     cd ${workspace}/genesis/
     git checkout HEAD contracts
     sed -i -e  's/alreadyInit = true;/turnLength = 16;alreadyInit = true;/' ${workspace}/genesis/contracts/BSCValidatorSet.sol
-    sed -i -e  's/public onlyCoinbase onlyZeroGasPrice {/public onlyCoinbase onlyZeroGasPrice {if (block.number < 2000) return;/' ${workspace}/genesis/contracts/BSCValidatorSet.sol
+    sed -i -e  's/public onlyCoinbase onlyZeroGasPrice {/public onlyCoinbase onlyZeroGasPrice {if (block.number < 2000000000) return;/' ${workspace}/genesis/contracts/BSCValidatorSet.sol
     
     poetry run python -m scripts.generate generate-validators
     poetry run python -m scripts.generate generate-init-holders "${initHolders}"
@@ -202,7 +202,7 @@ function start_node() {
     local pprof_port=$9
 
     # update `config` in genesis.json
-    # ${workspace}/.local/node${i}/geth${i} dumpgenesis --datadir ${workspace}/.local/node${i} | jq . > ${workspace}/.local/node${i}/genesis.json
+    ${workspace}/.local/node${i}/geth${i} dumpgenesis --datadir ${workspace}/.local/node${i} | jq . > ${workspace}/.local/node${i}/genesis.json
     nohup ${geth_bin} --config ${datadir}/config.toml \
         --datadir ${datadir} \
         --nodekey ${datadir}/geth/nodekey \
@@ -219,7 +219,6 @@ function start_node() {
         --override.fermi ${LastHardforkTime} \
         --override.osaka ${LastHardforkTime} \
         --override.mendel ${LastHardforkTime} \
-        --override.pasteur ${LastHardforkTime} \
         --override.immutabilitythreshold ${FullImmutabilityThreshold} \
         --override.breatheblockinterval ${BreatheBlockInterval} \
         --override.minforblobrequest ${MinBlocksForBlobRequests} \

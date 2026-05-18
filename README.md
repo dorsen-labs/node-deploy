@@ -88,3 +88,9 @@ cd txblob
 go build
 ./txblob
 ```
+
+## generate OPBNB QA genesis
+1. set PASSED_FORK_DELAY and LAST_FORK_MORE_DELAY to a larger number, and override later when start
+2. bash -x ./bsc_cluster.sh reset 
+3. bash -x ./bsc_cluster.sh restart, now .local/node0/genesis.json refreshed.
+4. rialtohash use hash in .local/node0/init.log
