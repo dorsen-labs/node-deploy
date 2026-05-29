@@ -10,8 +10,8 @@ basedir=$(
 workspace=${basedir}
 source ${workspace}/.env
 size=$((BSC_CLUSTER_SIZE))
-stateScheme="hash"
-dbEngine="leveldb"
+stateScheme="path"
+dbEngine="pebble"
 gcmode="full"
 sleepBeforeStart=15
 sleepAfterStart=10
