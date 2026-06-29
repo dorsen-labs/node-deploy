@@ -1,5 +1,5 @@
 [submodule "genesis"]
 	path = genesis
-	url = https://github.com/bnb-chain/bsc-genesis-contract.git
-	branch = master
+	url = https://github.com/dorsen-labs/dorsen-genesis-contract.git
+	branch = dc-v1.2.6
 	ignore = dirty
