@@ -19,7 +19,7 @@ sleepAfterStart=10
 # stop geth client
 function exit_previous() {
     ValIdx=$1
-    ps -ef  | grep geth$ValIdx | grep config |awk '{print $2}' | xargs kill
+    ps -ef  | grep geth$ValIdx | grep config |awk '{print $2}' | xargs -r kill
     sleep ${sleepBeforeStart}
 }
 
@@ -60,7 +60,7 @@ function reset_genesis() {
     poetry install --no-root
     npm install
     rm -rf lib/forge-std
-    forge install --no-git foundry-rs/forge-std@v1.7.3
+    forge install foundry-rs/forge-std@v1.7.3
     cd lib/forge-std/lib
     rm -rf ds-test
     git clone https://github.com/dapphub/ds-test
