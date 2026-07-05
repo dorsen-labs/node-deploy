@@ -81,9 +81,11 @@ function prepare_config() {
     # Run generate.py dorsen 
     poetry run python -m scripts.generate dorsen \
       --dorsen-chain-id "${CHAIN_ID}" \
-      --stake-hub-protector "${INIT_HOLDER}" \
-      --governor-protector "${INIT_HOLDER}" \
-      --token-recover-portal-protector "${INIT_HOLDER}" \
+      --tx-fee-treasury-address "${TX_FEE_TREASURY_ADDRESS}" \
+      --lock-amount-treasury-address "${LOCKED_AMOUNT_TREASURY_ADDRESS}" \
+      --stake-hub-protector "${PROTECTOR_ADDRESS}" \
+      --governor-protector "${PROTECTOR_ADDRESS}" \
+      --token-recover-portal-protector "${PROTECTOR_ADDRESS}" \
       --maxwell-time "${MAXWELL_TIME}" \
       --fermi-time "${FERMI_TIME}" \
       --osaka-time "${OSAKA_TIME}" \
@@ -201,7 +203,11 @@ case ${CMD} in
         stop || true
         start_node
         ;;
+    clean)
+        stop || true
+        rm -rf ${datadir}
+        ;;
     *)
-        echo "Usage: build_new_chain.sh reset|stop|restart|register"
+        echo "Usage: build_new_chain.sh reset|stop|restart|register|clean"
         ;;
 esac
