@@ -71,7 +71,7 @@ function prepare_config() {
     vote_addr="0x$(jq -r .pubkey "$(ls ${datadir}/bls/keystore/*.json | head -1)")"
     # Generate validators.conf (single line for 1 validator)
     rm -f validators.conf
-    powers="0000000BA43B7400" #50000000000 i.e, 50 voting power
+    powers="0x0000000BA43B7400" #50000000000 i.e, 50 voting power
     echo "${cons_addr},${cons_addr},${cons_addr},${powers},${vote_addr}" >> validators.conf
     # Generate validators.js from validators.conf
     poetry run python -m scripts.generate generate-validators
@@ -99,6 +99,8 @@ function initNetwork() {
 
     cp ${datadir}/nodekey ${datadir}/geth/nodekey
 
+    cp ${WORKDIR}/genesis/genesis.json ${datadir}/genesis.json
+
     cp ${WORKDIR}/config.toml ${datadir}/config.toml
 
     sed -i '' "s/NetworkId = 714/NetworkId = ${CHAIN_ID}/" ${datadir}/config.toml
@@ -112,8 +114,8 @@ function initNetwork() {
         --state.scheme ${stateScheme} \
         --db.engine ${dbEngine} \
         ${WORKDIR}/genesis/genesis.json >> ${initLog} 2>&1
-        cp ${WORKDIR}/genesis/genesis.json ${WORKDIR}/config/genesis.json
-        
+
+    cp ${WORKDIR}/genesis/genesis.json ${WORKDIR}/config/genesis.json
     cp ${datadir}/config.toml ${WORKDIR}/config/config.toml
     echo "${CHAIN_NAME}" > ${WORKDIR}/config/chain.txt
     
@@ -187,6 +189,7 @@ case ${CMD} in
         prepare_config
         initNetwork
         start_node
+        register_validator
         ;;
     register)
         register_validator
