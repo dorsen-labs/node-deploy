@@ -105,8 +105,8 @@ function initNetwork() {
 
     cp ${WORKDIR}/config.toml ${datadir}/config.toml
 
-    sed -i '' "s/NetworkId = 714/NetworkId = ${CHAIN_ID}/" ${datadir}/config.toml
-    sed -i '' "s/FilePath = bsc.log/FilePath = ${chain_name}.log/" ${datadir}/config.toml
+    sed -i "s/NetworkId = 714/NetworkId = ${CHAIN_ID}/" ${datadir}/config.toml
+    sed -i  "s/FilePath = bsc.log/FilePath = ${chain_name}.log/" ${datadir}/config.toml
 
     rm -f ${WORKDIR}/*${chain_name}.log*
 
