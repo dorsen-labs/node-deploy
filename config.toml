@@ -11,7 +11,7 @@ TriesInMemory = 128
 TrieTimeout = 150000000000
 EnablePreimageRecording = false
 EVNNodeIDsToAdd = []
-RPCEVMTimeout = "5s"
+RPCEVMTimeout = 5000000000
 
 [Eth.Miner]
 GasCeil = 70000000
@@ -62,7 +62,7 @@ WriteTimeout = 30000000000
 IdleTimeout = 120000000000
 
 [Node.LogConfig]
-FilePath = "bsc.log"
+FilePath = "dorsen.log"
 TimeFormat = "01-02|15:04:05.000"
 MaxBackups = 2
 MaxBytesSize = 10485760
