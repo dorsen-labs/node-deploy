@@ -1,0 +1,3 @@
+# Ignore everything in this directory
+*
+# Except new chain genesis and config
