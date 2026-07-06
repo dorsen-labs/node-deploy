@@ -85,7 +85,7 @@ func main() {
 	}
 	paddedChainIdBytes := make([]byte, 32)
 	copy(paddedChainIdBytes[32-len(chainId.Bytes()):], chainId.Bytes())
-	msgHash := crypto.Keccak256(append(consensusAddr.Bytes(), append(pubKey[:], paddedChainIdBytes...)...))
+	msgHash := crypto.Keccak256(append(operatorAddr.Bytes(), append(pubKey[:], paddedChainIdBytes...)...))
 	req := validatorpb.SignRequest{
 		PublicKey:   pubKey[:],
 		SigningRoot: msgHash,
