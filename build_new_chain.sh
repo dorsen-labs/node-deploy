@@ -165,6 +165,7 @@ function stop() {
 }
 
 function register_validator() {
+    sleep 45
     OP_KEY="${OPERATOR_PRIVATE_KEY}"
     [ -z "${OP_KEY}" ] && echo "Error: OPERATOR_PRIVATE_KEY not set in chain.env" && exit 1
     echo "Registering validator stake..."

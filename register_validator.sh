@@ -21,6 +21,8 @@ if [ -z "$(ls ${DORSEN_DIR}/keystore/*UTC--* 2>/dev/null)" ] || [ ! -d "${DORSEN
     exit 1
 fi
 
+sleep 45
+
 ${WORKDIR}/create-validator/create-validator \
     --consensus-key-dir "${DORSEN_DIR}" \
     --vote-key-dir "${DORSEN_DIR}" \
