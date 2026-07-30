@@ -124,6 +124,10 @@ function initNetwork() {
 }
 function start_node() {
     local cons_addr="0x$(jq -r .address ${datadir}/keystore/*)"
+    local blacklist_flag=""
+    if [ -f "${WORKDIR}/config/blacklist.json" ]; then
+        blacklist_flag="--blacklist ${WORKDIR}/config/blacklist.json"
+    fi
 
     nohup ${GETH} --config ${datadir}/config.toml \
         --datadir ${datadir} \
@@ -135,6 +139,7 @@ function start_node() {
         --metrics --metrics.addr localhost --metrics.port 6060 \
         --pprof --pprof.addr localhost --pprof.port 7060 \
         --gcmode ${gcmode} --syncmode full --monitor.maliciousvote \
+        ${blacklist_flag} \
         --mine --vote --unlock ${cons_addr} --miner.etherbase ${cons_addr} --password ${datadir}/password.txt --blspassword ${datadir}/password.txt \
         >> ${datadir}/${chain_name}-node.log 2>&1 &
 

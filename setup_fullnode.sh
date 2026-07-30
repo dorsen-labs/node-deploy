@@ -49,6 +49,10 @@ function init() {
 }
 
 function start() {
+    local blacklist_flag=""
+    if [ -f "${WORKDIR}/config/blacklist.json" ]; then
+        blacklist_flag="--blacklist ${WORKDIR}/config/blacklist.json"
+    fi
     nohup ${GETH} \
         --config $dst/config.toml \
         --datadir $dst \
@@ -66,6 +70,7 @@ function start() {
         --gcmode $gcmode \
         --syncmode $syncmode \
         --state.scheme $stateScheme \
+        ${blacklist_flag} \
         $extraflags \
         >> $dst/${chain_name}-node.log 2>&1 &
     echo $! > $dst/pid
